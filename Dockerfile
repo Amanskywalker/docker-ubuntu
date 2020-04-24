@@ -1,16 +1,10 @@
 FROM ubuntu:latest
 MAINTAINER amanskywalker (mail@amanskywalker.xyz)
 
-RUN apt-get update
+RUN apt-get update -qy
 
-RUN apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+RUN apt-get install -y curl
 
-RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+RUN curl -fsSL https://get.docker.com -o get-docker.sh
 
-RUN apt-key fingerprint 0EBFCD88
-
-RUN add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-
-RUN apt-get update
-
-RUN apt-get install docker-ce docker-ce-cli containerd.io
+RUN sh get-docker.sh
